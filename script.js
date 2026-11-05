@@ -252,6 +252,7 @@ function variantsList(p) { return `<div class="option-block"><h3>Elige la bebida
 function openProduct(id) {
   const p=byId.get(id);if(!p || !available(p))return;
   modalProduct=p;modalQty=1;modalExtras={};
+  getById('productDialog').classList.remove('showing-added');
   getById('modalBody').innerHTML=`<img class="modal-photo" src="${photoFor(p)}" alt="${escapeHTML(p.name)}" width="400" height="274"><div class="modal-content"><span class="modal-overline">${escapeHTML(p.category)} · DMEMO</span><h2 id="modalTitle">${escapeHTML(p.name)}</h2><p class="modal-description">${escapeHTML(p.desc)}</p><div class="modal-price">${money(basePrice(p))}</div>${p.wings?wingsList():''}${p.variants?variantsList(p):''}${p.creams?creamsList():''}${p.extras?extraList():''}<div class="option-block"><h3>Instrucciones especiales</h3><textarea id="modalNotes" class="modal-notes" maxlength="260" placeholder="Ej. Sin cebolla, papas crocantes... (opcional)"></textarea></div><div class="modal-quantity"><label>Cantidad</label><div class="modal-qty"><button type="button" id="modalQtyMinus" aria-label="Disminuir cantidad">−</button><span id="modalQtyValue">1</span><button type="button" id="modalQtyPlus" aria-label="Aumentar cantidad">+</button></div></div><button type="button" class="btn btn-yellow btn-block modal-add" id="modalAdd"><span>AGREGAR AL CARRITO</span><strong id="modalTotal" class="modal-add-price">${money(basePrice(p))}</strong></button></div>`;
   getById('productDialog').showModal();
 }
@@ -272,7 +273,25 @@ function addModalProduct() {
   const item={id:modalProduct.id,qty:modalQty,creams:Array.from(body.querySelectorAll('input[name="cream"]:checked')).map(input=>input.value),wingSauce,variant,extras:PLATE_EXTRAS.filter(e=>modalExtras[e.id]>0).map(e=>({id:e.id,qty:modalExtras[e.id]})),notes:getById('modalNotes').value.trim().slice(0,260)};
   const matched=cart.find(other=>itemKey(other)===itemKey(item));
   if(matched)matched.qty=Math.min(99,matched.qty+item.qty);else cart.push(item);
-  saveCart();renderCart();getById('productDialog').close();showToast('✓ Agregado a tu pedido');
+  saveCart();renderCart();
+  // Después de añadir, mostrar las dos opciones sin salir del flujo de compra.
+  showAddedConfirmation();
+}
+function showAddedConfirmation() {
+  const dialog=getById('productDialog');
+  dialog.classList.add('showing-added');
+  getById('modalBody').innerHTML=`
+    <div class="added-confirmation">
+      <div class="added-check" aria-hidden="true">✓</div>
+      <span class="added-kicker">DMEMO FAST FOOD</span>
+      <h2 id="modalTitle">¡Agregado a tu pedido!</h2>
+      <p>${escapeHTML(modalProduct.name)} ya está en tu carrito.</p>
+      <div class="added-summary"><span>${totalCount()} ${totalCount()===1?'producto':'productos'} en tu pedido</span><strong>${money(totalPrice())}</strong></div>
+      <button class="btn btn-yellow btn-block" id="confirmAddedOrder" type="button">CONFIRMAR PEDIDO <span aria-hidden="true">→</span></button>
+      <button class="added-keep-shopping" id="continueAddedShopping" type="button">SEGUIR COMPRANDO</button>
+    </div>`;
+  dialog.scrollTop=0;
+  getById('confirmAddedOrder').focus();
 }
 function itemDetails(item) {
   const parts=[];
@@ -388,6 +407,17 @@ function init() {
     else if(b.dataset.extraPlus){const k=b.dataset.extraPlus;modalExtras[k]=Math.min(10,(modalExtras[k]||0)+1);}
     else if(b.dataset.extraMinus){const k=b.dataset.extraMinus;modalExtras[k]=Math.max(0,(modalExtras[k]||0)-1);}
     else if(b.id==='modalAdd'){addModalProduct();return;}
+    else if(b.id==='confirmAddedOrder'){
+      getById('productDialog').close();
+      showCartList();
+      openCart();
+      return;
+    }
+    else if(b.id==='continueAddedShopping'){
+      getById('productDialog').close();
+      getById('menu').scrollIntoView({behavior:'smooth',block:'start'});
+      return;
+    }
     updateModalTotal();
   });
   [getById('openCartTop'),getById('floatingCart')].forEach(btn=>btn.addEventListener('click',openCart));

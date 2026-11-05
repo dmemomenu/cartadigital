@@ -36,3 +36,20 @@
 @keyframes promo-float{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(9px) rotate(8deg)}}
 @media(max-width:650px){.monday-promo{padding-top:9px}.promo-inner{padding:18px 17px;align-items:flex-start;flex-direction:column;gap:13px;border-radius:15px}.promo-copy h2{font-size:24px}.promo-side{width:100%;flex-direction:row;justify-content:space-between}.promo-button{min-height:41px;padding:9px 15px}.promo-spark{right:-10px;top:-30px}}
 @media(prefers-reduced-motion:reduce){.promo-inner:before,.promo-spark{animation:none}}
+
+/* Ventana de confirmación tras agregar un producto al carrito */
+.product-dialog.showing-added{max-width:min(430px,calc(100vw - 28px));background:#191b18;color:#fff;border:1px solid #4b4d3e;box-shadow:0 22px 85px #000c}
+.product-dialog.showing-added .modal-close{background:#33362e;color:#fff;box-shadow:none}
+.added-confirmation{padding:36px 25px 28px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px}
+.added-check{width:67px;height:67px;border-radius:50%;background:#ffe000;color:#1b1b18;font-size:36px;font-weight:900;display:grid;place-items:center;box-shadow:0 4px 22px #ffe00030}
+.added-kicker{font-size:10px;font-weight:900;letter-spacing:.15em;color:#ffda00}
+.added-confirmation h2{font:900 clamp(25px,6vw,31px)/1.13 var(--font-heading);margin:0;letter-spacing:-.025em}
+.added-confirmation p{margin:0;color:#d0d1c9;font-size:13px;line-height:1.5}
+.added-summary{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;background:#292c26;border:1px solid #484d38;border-radius:12px;padding:15px;margin:8px 0 5px}
+.added-summary span{font-size:12px;color:#dbded4;font-weight:700;text-align:left}
+.added-summary strong{font:900 18px var(--font-heading);color:#ffdf00;white-space:nowrap}
+.added-confirmation .btn{width:100%;justify-content:center;gap:12px;min-height:51px;font-size:13px}
+.added-keep-shopping{width:100%;min-height:45px;border:1px solid #686b5c;border-radius:10px;background:transparent;color:#fff;font:800 13px var(--font-body);cursor:pointer;transition:background .2s,border-color .2s}
+.added-keep-shopping:hover{background:#33362e;border-color:#ffe000}
+.added-keep-shopping:focus-visible,.added-confirmation button:focus-visible{outline:3px solid #ffe000;outline-offset:3px}
+@media(max-width:450px){.added-confirmation{padding:26px 18px 22px}.added-summary{padding:12px}.added-confirmation .btn{font-size:12px}}
