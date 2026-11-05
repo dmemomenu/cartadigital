@@ -152,15 +152,13 @@ const PRODUCT_IMAGE_FILES = Object.freeze({
   'jugo-mango':'jugo-mango.jpg',
   'limonada':'limonada.jpg',
   'limonada-frozen':'limonada-frozen.jpg',
-  'limonada-frozen':'limonada.jpg',
   'maracuya':'maracuya.jpg',
   'maracuya-frozen':'maracuya-frozen.jpg',
-  'maracuya-frozen':'maracuya.jpg',
   'chicha-morada':'chicha-morada.jpg'
 });
 function photoFor(product) {
   const filename = PRODUCT_IMAGE_FILES[product.id];
-  return filename ? `img/${filename}?v=20261105` : (ASSETS[product.image] || ASSETS['burger-classic']);
+  return filename ? `img/${filename}?v=20261105frontal20` : (ASSETS[product.image] || ASSETS['burger-classic']);
 }
 
 const getById = (id) => document.getElementById(id);
