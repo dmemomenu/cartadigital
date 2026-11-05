@@ -85,15 +85,15 @@ const MENU = [
     {id:'jugo-especial',name:'Jugo Especial',desc:'Jugo especial de frutas',price:15,image:'jugo-especial',section:'Jugos'},
     {id:'jugo-maracumango',name:'Maracumango',desc:'Jugo de maracuyá con mango',price:13,image:'jugo-maracumango',section:'Jugos'},
     {id:'jugo-fresa-leche',name:'Fresa con Leche',desc:'Jugo de fresa con leche',price:15,image:'jugo-fresa-leche',section:'Jugos'},
-    {id:'jugo-fresa',name:'Jugo de Fresa',desc:'Jugo de fresa',price:10,image:'limonada',section:'Jugos'},
-    {id:'jugo-pina',name:'Jugo de Piña',desc:'Jugo de piña',price:10,image:'limonada',section:'Jugos'},
-    {id:'jugo-papaya',name:'Jugo de Papaya',desc:'Jugo de papaya',price:10,image:'limonada',section:'Jugos'},
-    {id:'jugo-mango',name:'Jugo de Mango',desc:'Jugo de mango',price:10,image:'limonada',section:'Jugos'},
+    {id:'jugo-fresa',name:'Jugo de Fresa',desc:'Jugo de fresa',price:10,image:'jugo-fresa',section:'Jugos'},
+    {id:'jugo-pina',name:'Jugo de Piña',desc:'Jugo de piña',price:10,image:'jugo-pina',section:'Jugos'},
+    {id:'jugo-papaya',name:'Jugo de Papaya',desc:'Jugo de papaya',price:10,image:'jugo-papaya',section:'Jugos'},
+    {id:'jugo-mango',name:'Jugo de Mango',desc:'Jugo de mango',price:10,image:'jugo-mango',section:'Jugos'},
     {id:'limonada',name:'Limonada',desc:'Bebida natural de limón',price:10,image:'limonada',section:'Bebidas naturales'},
-    {id:'limonada-frozen',name:'Limonada Frozen',desc:'Limonada frozen',price:12,image:'limonada',section:'Bebidas naturales'},
-    {id:'maracuya',name:'Maracuyá',desc:'Bebida natural de maracuyá',price:10,image:'limonada',section:'Bebidas naturales'},
-    {id:'maracuya-frozen',name:'Maracuyá Frozen',desc:'Maracuyá frozen',price:12,image:'limonada',section:'Bebidas naturales'},
-    {id:'chicha-morada',name:'Chicha Morada',desc:'Bebida tradicional de maíz morado',price:10,image:'limonada',section:'Bebidas naturales'}
+    {id:'limonada-frozen',name:'Limonada Frozen',desc:'Limonada frozen',price:12,image:'limonada-frozen',section:'Bebidas naturales'},
+    {id:'maracuya',name:'Maracuyá',desc:'Bebida natural de maracuyá',price:10,image:'maracuya',section:'Bebidas naturales'},
+    {id:'maracuya-frozen',name:'Maracuyá Frozen',desc:'Maracuyá frozen',price:12,image:'maracuya-frozen',section:'Bebidas naturales'},
+    {id:'chicha-morada',name:'Chicha Morada',desc:'Bebida tradicional de maíz morado',price:10,image:'chicha-morada',section:'Bebidas naturales'}
   ]}
 ];
 
@@ -151,8 +151,10 @@ const PRODUCT_IMAGE_FILES = Object.freeze({
   'jugo-papaya':'jugo-papaya.jpg',
   'jugo-mango':'jugo-mango.jpg',
   'limonada':'limonada.jpg',
+  'limonada-frozen':'limonada-frozen.jpg',
   'limonada-frozen':'limonada.jpg',
   'maracuya':'maracuya.jpg',
+  'maracuya-frozen':'maracuya-frozen.jpg',
   'maracuya-frozen':'maracuya.jpg',
   'chicha-morada':'chicha-morada.jpg'
 });
