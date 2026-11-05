@@ -5,15 +5,15 @@
 // ============================================================
 const CONFIG = Object.freeze({
   business: 'DMEMO Fast Food',
-  whatsapp: '51902058990',
-  address: 'Ucayali 380, Villa María del Triunfo 15822',
-  maps: 'https://www.google.com/maps?q=-12.2145796,-76.9092452&z=17&hl=es'
+  whatsapp: '51989580237',
+  address: 'Ucayali 356, Villa María del Triunfo 15822',
+  maps: 'https://www.google.com/maps/search/?api=1&query=Ucayali%20356%2C%20Villa%20Mar%C3%ADa%20del%20Triunfo%2C%20Lima%2C%20Per%C3%BA'
 });
 
 const CREAMS = ['Mayonesa', 'Ketchup', 'Mostaza', 'Tártara', 'Ají'];
-const WING_SAUCES = ['BBQ', 'Búfalo', 'Acevichada', 'Maracuyá'];
-// Estos adicionales SOLO aparecen en las hamburguesas.
-const BURGER_EXTRAS = [
+const WING_SAUCES = ['BBQ', 'Búfalo', 'Maracuyá', 'Acevichada'];
+// Los adicionales se ofrecen en todos los platos, excepto bebidas.
+const PLATE_EXTRAS = [
   {id:'platano',name:'Plátano',price:1.50},
   {id:'jamon',name:'Jamón',price:1.50},
   {id:'huevo',name:'Huevo',price:1.50},
@@ -48,6 +48,7 @@ const MENU = [
   { id:'salchipapas', title:'Salchipapas', emoji:'🍟', products:[
     {id:'salchi-clasica',name:'Salchi Clásica',desc:'Hot dog ahumado y papas nativas',price:8,image:'salchi-classic',creams:true},
     {id:'choripapa',name:'Choripapa',desc:'Hot dog ahumado, chorizo y huevo',price:13,image:'salchi-classic',creams:true},
+    {id:'salchi-nuggets',name:'Salchi Nuggets',desc:'Hot dog ahumado, nuggets de pollo y papas fritas',price:17,image:'salchi-nuggets',creams:true},
     {id:'salchi-pobre',name:'A lo Pobre',desc:'Hot dog ahumado, plátano bellaco y huevo',price:15,image:'salchi-pobre',creams:true},
     {id:'salchi-carnivora',name:'La Carnívora',desc:'Hot dog ahumado, carne artesanal y huevo',price:17,image:'salchi-pobre',creams:true}
   ]},
@@ -62,12 +63,12 @@ const MENU = [
     {id:'chaufa-alitas',name:'Chaufa con Alitas',desc:'Arroz chaufa con alitas',price:15,image:'chaufa-alitas',creams:true}
   ]},
   { id:'alitas', title:'Alitas', emoji:'🍗', products:[
-    {id:'alitas-6',name:'Alitas 6 Piezas',desc:'6 alitas bañadas en salsa, con papas nativas y cremas',price:18,image:'alitas-6',creams:true,wings:true},
-    {id:'salchialitas',name:'Salchialitas',desc:'Papas nativas, hot dog ahumado, huevo y 4 alitas BBQ',price:22,image:'salchialitas',creams:true,wings:true},
-    {id:'alitas-12',name:'Alitas 12 Piezas',desc:'12 alitas bañadas en salsa, con papas nativas y cremas',price:28,image:'alitas-12',creams:true,wings:true},
-    {id:'alitas-18',name:'Alitas 18 Piezas',desc:'Con papas nativas y cremas',price:38,image:'alitas-18',creams:true,wings:true},
-    {id:'alitas-24',name:'Alitas 24 Piezas',desc:'Con papas nativas y cremas',price:48,image:'alitas-24',creams:true,wings:true},
-    {id:'ronda-alitas',name:'Ronda de Alitas',desc:'Con papas nativas y cremas',price:58,image:'ronda-alitas',creams:true,wings:true}
+    {id:'alitas-6',name:'Alitas 6 Piezas',desc:'6 alitas bañadas en salsa (maracuyá, BBQ, búfalo o acevichada), con papas nativas y cremas',price:18,image:'alitas-6',creams:true,wings:true},
+    {id:'salchialitas',name:'Salchialitas',desc:'4 alitas bañadas en salsa (maracuyá, BBQ, búfalo o acevichada), papas nativas, hot dog ahumado y huevo',price:22,image:'salchialitas',creams:true,wings:true},
+    {id:'alitas-12',name:'Alitas 12 Piezas',desc:'12 alitas bañadas en salsa (maracuyá, BBQ, búfalo o acevichada), con papas nativas y cremas',price:28,image:'alitas-12',creams:true,wings:true},
+    {id:'alitas-18',name:'Alitas 18 Piezas',desc:'18 alitas bañadas en salsa (maracuyá, BBQ, búfalo o acevichada), con papas nativas y cremas',price:38,image:'alitas-18',creams:true,wings:true},
+    {id:'alitas-24',name:'Alitas 24 Piezas',desc:'24 alitas bañadas en salsa (maracuyá, BBQ, búfalo o acevichada), con papas nativas y cremas',price:48,image:'alitas-24',creams:true,wings:true},
+    {id:'ronda-alitas',name:'Ronda de Alitas',desc:'Alitas bañadas en salsa (cantidad por confirmar), con papas nativas y cremas',price:58,image:'ronda-alitas',creams:true,wings:true}
   ]},
   { id:'mollejitas', title:'Mollejitas', emoji:'🥩', products:[
     {id:'mollejitas',name:'Mollejitas',desc:'Mollejitas salteadas y papas nativas (200 g)',price:15,image:'mollejitas',creams:true},
@@ -81,6 +82,9 @@ const MENU = [
     {id:'gaseosa-600',name:'Gaseosa 600 ml',desc:'Inca Kola o Coca-Cola',price:4,image:'cola',section:'Gaseosas',variants:['Inca Kola','Coca-Cola']},
     {id:'gaseosa-1l',name:'Gaseosa 1 litro',desc:'Inca Kola o Coca-Cola',price:6,image:'cola',section:'Gaseosas',variants:['Inca Kola','Coca-Cola']},
     {id:'gaseosa-15l',name:'Gaseosa 1.5 litros',desc:'Inca Kola o Coca-Cola',price:8,image:'cola',section:'Gaseosas',variants:['Inca Kola','Coca-Cola']},
+    {id:'jugo-especial',name:'Jugo Especial',desc:'Jugo especial de frutas',price:15,image:'jugo-especial',section:'Jugos'},
+    {id:'jugo-maracumango',name:'Maracumango',desc:'Jugo de maracuyá con mango',price:13,image:'jugo-maracumango',section:'Jugos'},
+    {id:'jugo-fresa-leche',name:'Fresa con Leche',desc:'Jugo de fresa con leche',price:15,image:'jugo-fresa-leche',section:'Jugos'},
     {id:'jugo-fresa',name:'Jugo de Fresa',desc:'Jugo de fresa',price:10,image:'limonada',section:'Jugos'},
     {id:'jugo-pina',name:'Jugo de Piña',desc:'Jugo de piña',price:10,image:'limonada',section:'Jugos'},
     {id:'jugo-papaya',name:'Jugo de Papaya',desc:'Jugo de papaya',price:10,image:'limonada',section:'Jugos'},
@@ -92,6 +96,9 @@ const MENU = [
     {id:'chicha-morada',name:'Chicha Morada',desc:'Bebida tradicional de maíz morado',price:10,image:'limonada',section:'Bebidas naturales'}
   ]}
 ];
+
+// Todos los platos permiten adicionales; bebidas nunca.
+MENU.forEach(group => { if (group.id !== 'bebidas') group.products.forEach(product => { product.extras = true; }); });
 
 // IMÁGENES DEL CATÁLOGO: se guardan en la carpeta img/.
 // Para cambiar una foto: reemplaza el JPG manteniendo el mismo nombre.
@@ -113,6 +120,7 @@ const PRODUCT_IMAGE_FILES = Object.freeze({
   'pierna-broaster':'broaster-pierna.jpg',
   'pecho-broaster':'broaster-pecho.jpg',
   'salchi-clasica':'salchi-clasica.jpg',
+  'salchi-nuggets':'salchi-nuggets.jpg',
   'choripapa':'choripapa.jpg',
   'salchi-pobre':'salchi-pobre.jpg',
   'salchi-carnivora':'salchi-carnivora.jpg',
@@ -135,6 +143,9 @@ const PRODUCT_IMAGE_FILES = Object.freeze({
   'gaseosa-600':'gaseosas.jpg',
   'gaseosa-1l':'gaseosas.jpg',
   'gaseosa-15l':'gaseosas.jpg',
+  'jugo-especial':'jugo-especial.jpg',
+  'jugo-maracumango':'jugo-maracumango.jpg',
+  'jugo-fresa-leche':'jugo-fresa-leche.jpg',
   'jugo-fresa':'jugo-fresa.jpg',
   'jugo-pina':'jugo-pina.jpg',
   'jugo-papaya':'jugo-papaya.jpg',
@@ -147,12 +158,21 @@ const PRODUCT_IMAGE_FILES = Object.freeze({
 });
 function photoFor(product) {
   const filename = PRODUCT_IMAGE_FILES[product.id];
-  return filename ? `img/${filename}` : (ASSETS[product.image] || ASSETS['burger-classic']);
+  return filename ? `img/${filename}?v=20261105` : (ASSETS[product.image] || ASSETS['burger-classic']);
 }
 
 const getById = (id) => document.getElementById(id);
 const escapeHTML = (value) => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money = (value) => 'S/ ' + Number(value).toFixed(2);
+// Promoción Lunes Zapatero: se calcula con la hora de Perú y se aplica en TODO el flujo.
+const isMondayInPeru = (at = new Date()) => new Intl.DateTimeFormat('en-US', {timeZone:'America/Lima',weekday:'short'}).format(at) === 'Mon';
+const basePrice = (p, at = new Date()) => p.id === 'burger-clasica' && isMondayInPeru(at) ? 8 : p.price;
+function refreshMondayPromo() {
+  const active = isMondayInPeru();
+  const tag = getById('promoStatus');
+  if (tag) { tag.textContent = active ? '¡PROMO ACTIVA HOY!' : 'SOLO LOS LUNES'; tag.classList.toggle('is-live', active); }
+}
+
 const allProducts = MENU.flatMap(group => group.products.map(product => ({...product,category:group.title})));
 const byId = new Map(allProducts.map(product => [product.id,product]));
 const available = product => product.available !== false;
@@ -174,14 +194,14 @@ function loadCart() {
         creams:Array.isArray(item.creams)?item.creams.filter(c=>CREAMS.includes(c)):[],
         wingSauce:WING_SAUCES.includes(item.wingSauce)?item.wingSauce:'',
         variant:typeof item.variant==='string' && byId.get(item.id).variants?.includes(item.variant)?item.variant:'',
-        extras:Array.isArray(item.extras) && byId.get(item.id).extras ? item.extras.filter(x=>BURGER_EXTRAS.some(e=>e.id===x.id) && Number.isInteger(x.qty) && x.qty>=1 && x.qty<=10).map(x=>({id:x.id,qty:x.qty})) : [],
+        extras:Array.isArray(item.extras) && byId.get(item.id).extras ? item.extras.filter(x=>PLATE_EXTRAS.some(e=>e.id===x.id) && Number.isInteger(x.qty) && x.qty>=1 && x.qty<=10).map(x=>({id:x.id,qty:x.qty})) : [],
         notes:typeof item.notes==='string'?item.notes.slice(0,260):''
       }));
   } catch (_) { cart = []; }
 }
 function saveCart() { try { localStorage.setItem(storageKey,JSON.stringify(cart)); } catch (_) {} }
-function extrasPrice(item) { return (item.extras||[]).reduce((sum,x)=>sum+(BURGER_EXTRAS.find(e=>e.id===x.id)?.price||0)*x.qty,0); }
-function unitPrice(item) { return byId.get(item.id).price + extrasPrice(item); }
+function extrasPrice(item) { return (item.extras||[]).reduce((sum,x)=>sum+(PLATE_EXTRAS.find(e=>e.id===x.id)?.price||0)*x.qty,0); }
+function unitPrice(item) { return basePrice(byId.get(item.id)) + extrasPrice(item); }
 function totalPrice() { return cart.reduce((sum,item)=>sum+unitPrice(item)*item.qty,0); }
 function totalCount() { return cart.reduce((sum,item)=>sum+item.qty,0); }
 function itemKey(item) { return JSON.stringify([item.id,[...(item.creams||[])].sort(),item.wingSauce||'',item.variant||'',item.extras||[],item.notes||'']); }
@@ -194,7 +214,7 @@ function showToast(message) {
 function productCard(p) {
   return `<article class="product-card">
     <div class="product-photo"><img src="${photoFor(p)}" alt="${escapeHTML(p.name)}" loading="lazy" width="400" height="274"><span class="photo-badge">DMEMO</span></div>
-    <div class="product-info"><h4>${escapeHTML(p.name)}</h4><p class="product-desc">${escapeHTML(p.desc)}</p><div class="product-bottom"><strong class="price">${money(p.price)}</strong><button class="add-btn" type="button" data-product="${p.id}" aria-label="Personalizar y agregar ${escapeHTML(p.name)}"><svg><use href="#ico-plus"/></svg></button></div></div>
+    <div class="product-info"><h4>${escapeHTML(p.name)}</h4><p class="product-desc">${escapeHTML(p.desc)}</p><div class="product-bottom"><strong class="price">${money(basePrice(p))}</strong><button class="add-btn" type="button" data-product="${p.id}" aria-label="Personalizar y agregar ${escapeHTML(p.name)}"><svg><use href="#ico-plus"/></svg></button></div></div>
   </article>`;
 }
 function renderNav() {
@@ -224,7 +244,7 @@ function renderMenu(category='all') {
 function setActiveChip(id) { document.querySelectorAll('.category-chip').forEach(btn=>btn.classList.toggle('active',btn.dataset.category===id)); }
 
 function extraList() {
-  return `<div class="option-block"><h3>Adicionales para tu hamburguesa</h3><p>Opcionales. Se suman automáticamente al precio.</p>`+BURGER_EXTRAS.map(x=>`<div class="extra-row"><div class="extra-name">${escapeHTML(x.name)}<small>+ ${money(x.price)} por unidad</small></div><div class="extra-stepper"><button type="button" data-extra-minus="${x.id}" aria-label="Quitar ${escapeHTML(x.name)}">−</button><output data-extra-count="${x.id}">0</output><button type="button" data-extra-plus="${x.id}" aria-label="Agregar ${escapeHTML(x.name)}">+</button></div></div>`).join('')+'</div>';
+  return `<div class="option-block"><h3>Adicionales para tu plato</h3><p>Opcionales. Se suman automáticamente al precio.</p>`+PLATE_EXTRAS.map(x=>`<div class="extra-row"><div class="extra-name">${escapeHTML(x.name)}<small>+ ${money(x.price)} por unidad</small></div><div class="extra-stepper"><button type="button" data-extra-minus="${x.id}" aria-label="Quitar ${escapeHTML(x.name)}">−</button><output data-extra-count="${x.id}">0</output><button type="button" data-extra-plus="${x.id}" aria-label="Agregar ${escapeHTML(x.name)}">+</button></div></div>`).join('')+'</div>';
 }
 function creamsList() { return `<div class="option-block"><h3>Elige tus cremas</h3><p>Puedes seleccionar varias. La carta no indica un recargo por crema.</p><div class="pill-options">`+CREAMS.map(c=>`<label class="pill-option"><input type="checkbox" name="cream" value="${c}"><span>${c}</span></label>`).join('')+'</div></div>'; }
 function wingsList() { return `<div class="option-block"><h3>Elige tu salsa de alitas *</h3><p>Selecciona una salsa para tu plato.</p><div class="pill-options">`+WING_SAUCES.map(c=>`<label class="pill-option"><input type="radio" name="wingSauce" value="${c}"><span>${c}</span></label>`).join('')+'</div></div>'; }
@@ -232,13 +252,13 @@ function variantsList(p) { return `<div class="option-block"><h3>Elige la bebida
 function openProduct(id) {
   const p=byId.get(id);if(!p || !available(p))return;
   modalProduct=p;modalQty=1;modalExtras={};
-  getById('modalBody').innerHTML=`<img class="modal-photo" src="${photoFor(p)}" alt="${escapeHTML(p.name)}" width="400" height="274"><div class="modal-content"><span class="modal-overline">${escapeHTML(p.category)} · DMEMO</span><h2 id="modalTitle">${escapeHTML(p.name)}</h2><p class="modal-description">${escapeHTML(p.desc)}</p><div class="modal-price">${money(p.price)}</div>${p.wings?wingsList():''}${p.variants?variantsList(p):''}${p.creams?creamsList():''}${p.extras?extraList():''}<div class="option-block"><h3>Instrucciones especiales</h3><textarea id="modalNotes" class="modal-notes" maxlength="260" placeholder="Ej. Sin cebolla, papas crocantes... (opcional)"></textarea></div><div class="modal-quantity"><label>Cantidad</label><div class="modal-qty"><button type="button" id="modalQtyMinus" aria-label="Disminuir cantidad">−</button><span id="modalQtyValue">1</span><button type="button" id="modalQtyPlus" aria-label="Aumentar cantidad">+</button></div></div><button type="button" class="btn btn-yellow btn-block modal-add" id="modalAdd"><span>AGREGAR AL CARRITO</span><strong id="modalTotal" class="modal-add-price">${money(p.price)}</strong></button></div>`;
+  getById('modalBody').innerHTML=`<img class="modal-photo" src="${photoFor(p)}" alt="${escapeHTML(p.name)}" width="400" height="274"><div class="modal-content"><span class="modal-overline">${escapeHTML(p.category)} · DMEMO</span><h2 id="modalTitle">${escapeHTML(p.name)}</h2><p class="modal-description">${escapeHTML(p.desc)}</p><div class="modal-price">${money(basePrice(p))}</div>${p.wings?wingsList():''}${p.variants?variantsList(p):''}${p.creams?creamsList():''}${p.extras?extraList():''}<div class="option-block"><h3>Instrucciones especiales</h3><textarea id="modalNotes" class="modal-notes" maxlength="260" placeholder="Ej. Sin cebolla, papas crocantes... (opcional)"></textarea></div><div class="modal-quantity"><label>Cantidad</label><div class="modal-qty"><button type="button" id="modalQtyMinus" aria-label="Disminuir cantidad">−</button><span id="modalQtyValue">1</span><button type="button" id="modalQtyPlus" aria-label="Aumentar cantidad">+</button></div></div><button type="button" class="btn btn-yellow btn-block modal-add" id="modalAdd"><span>AGREGAR AL CARRITO</span><strong id="modalTotal" class="modal-add-price">${money(basePrice(p))}</strong></button></div>`;
   getById('productDialog').showModal();
 }
 function updateModalTotal() {
   if (!modalProduct)return;
-  const extraTotal=BURGER_EXTRAS.reduce((sum,e)=>sum+(modalExtras[e.id]||0)*e.price,0);
-  getById('modalTotal').textContent=money((modalProduct.price+extraTotal)*modalQty);
+  const extraTotal=PLATE_EXTRAS.reduce((sum,e)=>sum+(modalExtras[e.id]||0)*e.price,0);
+  getById('modalTotal').textContent=money((basePrice(modalProduct)+extraTotal)*modalQty);
   getById('modalQtyValue').textContent=modalQty;
   getById('modalBody').querySelectorAll('[data-extra-count]').forEach(el=>el.textContent=modalExtras[el.dataset.extraCount]||0);
 }
@@ -249,7 +269,7 @@ function addModalProduct() {
   const variant=body.querySelector('input[name="variant"]:checked')?.value||'';
   if(modalProduct.wings && !wingSauce){showToast('Selecciona una salsa para las alitas');return;}
   if(modalProduct.variants && !variant){showToast('Selecciona la bebida');return;}
-  const item={id:modalProduct.id,qty:modalQty,creams:Array.from(body.querySelectorAll('input[name="cream"]:checked')).map(input=>input.value),wingSauce,variant,extras:BURGER_EXTRAS.filter(e=>modalExtras[e.id]>0).map(e=>({id:e.id,qty:modalExtras[e.id]})),notes:getById('modalNotes').value.trim().slice(0,260)};
+  const item={id:modalProduct.id,qty:modalQty,creams:Array.from(body.querySelectorAll('input[name="cream"]:checked')).map(input=>input.value),wingSauce,variant,extras:PLATE_EXTRAS.filter(e=>modalExtras[e.id]>0).map(e=>({id:e.id,qty:modalExtras[e.id]})),notes:getById('modalNotes').value.trim().slice(0,260)};
   const matched=cart.find(other=>itemKey(other)===itemKey(item));
   if(matched)matched.qty=Math.min(99,matched.qty+item.qty);else cart.push(item);
   saveCart();renderCart();getById('productDialog').close();showToast('✓ Agregado a tu pedido');
@@ -259,7 +279,7 @@ function itemDetails(item) {
   if(item.variant)parts.push(item.variant);
   if(item.wingSauce)parts.push('Salsa: '+item.wingSauce);
   if(item.creams?.length)parts.push('Cremas: '+item.creams.join(', '));
-  const extras=(item.extras||[]).map(x=>{const e=BURGER_EXTRAS.find(y=>y.id===x.id);return `${x.qty} × ${e?.name||''}`;});
+  const extras=(item.extras||[]).map(x=>{const e=PLATE_EXTRAS.find(y=>y.id===x.id);return `${x.qty} × ${e?.name||''}`;});
   if(extras.length)parts.push('Adicionales: '+extras.join(', '));
   if(item.notes)parts.push('Nota: '+item.notes);
   return parts;
@@ -343,7 +363,7 @@ function init() {
   getById('brandLogo').src=ASSETS.logo;
   getById('heroFood').src=ASSETS['burger-bestia'];
   getById('year').textContent=new Date().getFullYear();
-  renderNav();renderMenu();loadCart();renderCart();setupPickupMin();
+  renderNav();renderMenu();loadCart();renderCart();setupPickupMin();refreshMondayPromo();
   getById('menuRoot').addEventListener('click',e=>{
     const btn=e.target.closest('[data-product]');if(btn)openProduct(btn.dataset.product);
   });
@@ -386,12 +406,15 @@ function init() {
   getById('backToCart').addEventListener('click',showCartList);
   document.querySelectorAll('input[name="deliveryMode"]').forEach(r=>r.addEventListener('change',updateDeliveryFields));
   updateDeliveryFields();
+  // Actualiza precios si el cliente dejó la página abierta al cambiar el día en Lima.
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden){const active=document.querySelector('.category-chip.active')?.dataset.category||'all';renderMenu(active);renderCart();refreshMondayPromo();}});
   getById('checkoutForm').addEventListener('submit',e=>{
     e.preventDefault();
     const result=formDataText();
     if(result.error){const el=getById('checkoutError');el.textContent=result.error;el.hidden=false;el.scrollIntoView({behavior:'smooth',block:'center'});return;}
     getById('checkoutError').hidden=true;
-    const url=`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(result.message)}`;
+    const text = result.message.normalize('NFC').replace(/\uFFFD/g, '');
+    const url = `https://api.whatsapp.com/send?${new URLSearchParams({phone:CONFIG.whatsapp,text}).toString()}`;
     // No se borra el carrito porque abrir WhatsApp NO garantiza que el mensaje se envió.
     const newWindow=window.open(url,'_blank','noopener,noreferrer');
     if(!newWindow){window.location.href=url;}
