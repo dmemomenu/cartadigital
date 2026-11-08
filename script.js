@@ -27,8 +27,8 @@ const PLATE_EXTRAS = [
 
 const MENU = [
   { id:'hamburguesas', title:'Hamburguesas', emoji:'🍔', products:[
-    {id:'burger-clasica',name:'Burguer Clásica',desc:'Carne artesanal y queso dambo',price:11,image:'burger-classic',extras:true,creams:true},
-    {id:'burger-chorizo',name:'Burguer Chorizo',desc:'Chorizo parrillero y queso dambo',price:11,image:'burger-chorizo',extras:true,creams:true},
+    {id:'burger-clasica',name:'Burguer Clásica',desc:'Carne artesanal y queso dambo',price:10,image:'burger-classic',extras:true,creams:true},
+    {id:'burger-chorizo',name:'Burguer Chorizo',desc:'Chorizo parrillero y queso dambo',price:10,image:'burger-chorizo',extras:true,creams:true},
     {id:'chorizo-royal',name:'Chorizo Royal',desc:'Chorizo parrillero, queso dambo, jamón y huevo',price:13,image:'chorizo-royal',extras:true,creams:true},
     {id:'filete-pollo-burger',name:'Filete de Pollo',desc:'Filete de pollo y queso dambo',price:13,image:'burger-filete',extras:true,creams:true},
     {id:'burger-royal',name:'Burguer Royal',desc:'Carne artesanal, queso dambo, jamón y huevo',price:13,image:'burger-royal',extras:true,creams:true},
@@ -50,11 +50,12 @@ const MENU = [
     {id:'choripapa',name:'Choripapa',desc:'Hot dog ahumado, chorizo y huevo',price:13,image:'salchi-classic',creams:true},
     {id:'salchi-nuggets',name:'Salchi Nuggets',desc:'Hot dog ahumado, nuggets de pollo y papas fritas',price:17,image:'salchi-nuggets',creams:true},
     {id:'salchi-pobre',name:'A lo Pobre',desc:'Hot dog ahumado, plátano bellaco y huevo',price:15,image:'salchi-pobre',creams:true},
-    {id:'salchi-carnivora',name:'La Carnívora',desc:'Hot dog ahumado, carne artesanal y huevo',price:17,image:'salchi-pobre',creams:true}
+    {id:'salchi-carnivora',name:'La Carnívora',desc:'Hot dog ahumado, carne artesanal y huevo',price:17,image:'salchi-pobre',creams:true},
+    {id:'salchialitas',name:'Salchialitas',desc:'4 alitas bañadas en salsa (maracuyá, BBQ, búfalo o acevichada), papas nativas, hot dog ahumado y huevo',price:22,image:'salchialitas',creams:true,wings:true}
   ]},
   { id:'mostritos', title:'Mostritos', emoji:'🍚', products:[
-    {id:'mostro-broaster',name:'Mostro Broaster',desc:'1/4 pollo broaster, papas nativas, ensalada, arroz chaufa y cremas',price:19,image:'mostro',creams:true},
-    {id:'mostrito-broaster',name:'Mostrito Broaster',desc:'1/8 pollo broaster, papas nativas, ensalada, arroz chaufa y cremas',price:16,image:'mostro',creams:true}
+    {id:'mostro-broaster',name:'Mostro Broaster',desc:'1/4 pollo broaster, papas nativas, ensalada, arroz chaufa',price:19,image:'mostro',creams:true},
+    {id:'mostrito-broaster',name:'Mostrito Broaster',desc:'1/8 pollo broaster, papas nativas, ensalada, arroz chaufa',price:16,image:'mostro',creams:true}
   ]},
   { id:'chaufas', title:'Chaufas', emoji:'🥘', products:[
     {id:'chaufa-pollo',name:'Chaufa de Pollo',desc:'Arroz chaufa con pollo',price:12,image:'chaufa-pollo',creams:true},
@@ -64,11 +65,10 @@ const MENU = [
   ]},
   { id:'alitas', title:'Alitas', emoji:'🍗', products:[
     {id:'alitas-6',name:'Alitas 6 Piezas',desc:'6 alitas bañadas en salsa (maracuyá, BBQ, búfalo o acevichada), con papas nativas y cremas',price:18,image:'alitas-6',creams:true,wings:true},
-    {id:'salchialitas',name:'Salchialitas',desc:'4 alitas bañadas en salsa (maracuyá, BBQ, búfalo o acevichada), papas nativas, hot dog ahumado y huevo',price:22,image:'salchialitas',creams:true,wings:true},
     {id:'alitas-12',name:'Alitas 12 Piezas',desc:'12 alitas bañadas en salsa (maracuyá, BBQ, búfalo o acevichada), con papas nativas y cremas',price:28,image:'alitas-12',creams:true,wings:true},
     {id:'alitas-18',name:'Alitas 18 Piezas',desc:'18 alitas bañadas en salsa (maracuyá, BBQ, búfalo o acevichada), con papas nativas y cremas',price:38,image:'alitas-18',creams:true,wings:true},
     {id:'alitas-24',name:'Alitas 24 Piezas',desc:'24 alitas bañadas en salsa (maracuyá, BBQ, búfalo o acevichada), con papas nativas y cremas',price:48,image:'alitas-24',creams:true,wings:true},
-    {id:'ronda-alitas',name:'Ronda de Alitas',desc:'Alitas bañadas en salsa (cantidad por confirmar), con papas nativas y cremas',price:58,image:'ronda-alitas',creams:true,wings:true}
+    {id:'ronda-alitas',name:'Ronda de Alitas',desc:'30 unidades de alitas bañadas en salsa, con papas nativas y cremas',price:58,image:'ronda-alitas',creams:true,wings:true}
   ]},
   { id:'mollejitas', title:'Mollejitas', emoji:'🥩', products:[
     {id:'mollejitas',name:'Mollejitas',desc:'Mollejitas salteadas y papas nativas (200 g)',price:15,image:'mollejitas',creams:true},
@@ -158,7 +158,7 @@ const PRODUCT_IMAGE_FILES = Object.freeze({
 });
 function photoFor(product) {
   const filename = PRODUCT_IMAGE_FILES[product.id];
-  return filename ? `img/${filename}?v=20261105frontal20` : (ASSETS[product.image] || ASSETS['burger-classic']);
+  return filename ? `img/${filename}?v=20261108fotos` : (ASSETS[product.image] || ASSETS['burger-classic']);
 }
 
 const getById = (id) => document.getElementById(id);
